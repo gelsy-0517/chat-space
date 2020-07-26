@@ -1,13 +1,14 @@
 .side-bar
   .side-bar__LeftHeader 
     .side-bar__LeftHeader__list 
-      .side-bar__LeftHeader__list__userName nnn
-      .side-bar__LeftHeader__list__iconlist
-        .side-bar__LeftHeader__list__iconlist__btn
+      %h3.side-bar__LeftHeader__list__userName
+        = current_user.name
+      %ul.side-bar__LeftHeader__list__iconlist
+        %li.side-bar__LeftHeader__list__iconlist__btn
           = link_to "#", class: "side-bar__LeftHeader__list__iconlist__btn--edit" do
             = icon('far', 'edit', class: "side-bar__LeftHeader__list__iconlist__btn--icon")
-        .side-bar__LeftHeader__list_iconlist__btn
-          = link_to "#", class: "side-bar__LeftHeader__list_iconlist__btn--cog" do
+        %li.side-bar__LeftHeader__list_iconlist__btn
+          = link_to edit_user_path(current_user), class: "side-bar__LeftHeader__list_iconlist__btn--cog" do
             = icon('fas', 'cog', class: "side-bar__LeftHeader__list__iconlist__btn--icon")
   .side-bar__GroupList 
     .side-bar__GroupList__Group
