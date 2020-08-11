@@ -2,38 +2,27 @@
   .chat-main__RightHeader
     .chat-main__RightHeader__group
       .chat-main__RightHeader__groupName
-        .chat-main__RightHeader__group__name <3>
+        .chat-main__RightHeader__group__name 
+          = @group.name
         %ul.chat-main__RightHeader__group__memberList 
           %li.chat-main__RightHeader__group__memberList--Member Member：
-          %li.chat-main__RightHeader__group__memberList--test test
-    = link_to "#", class: "chat-main__RightHeader__editButton" do
+          %li.chat-main__RightHeader__group__memberList--test
+            - @group.users.each do |user|
+              = user.name
+    = link_to edit_group_path(@group), class: "chat-main__RightHeader__editButton" do
       = "Edit"
   .chat-main__MessageField 
-    .chat-main__MessageField__MessageBox
-      .chat-main__MessageField__MessageBox__MessageInfo
-        .chat-main__MessageField__MessageBox__MessageInfo__userName sigesige
-        .chat-main__MessageField__MessageBox__MessageInfo__date 2020年7月15日 22時14分
-      .chat-main__MessageField__MessageBox__Message 
-        %p.chat-main__MessageField__MessageBox__Message__content itiro
+    = render @messages
 
-    .chat-main__MessageField__MessageBox
-      .chat-main__MessageField__MessageBox__MessageInfo
-        .chat-main__MessageField__MessageBox__MessageInfo__userName sigesige
-        .chat-main__MessageField__MessageBox__MessageInfo__date 2020年7月15日 22時14分
-      .chat-main__MessageField__MessageBox__Message 
-        %p.chat-main__MessageField__MessageBox__Message__content itiro
+
 
 
 
   .chat-main__Footer 
-    %form.chat-main__Footer__Form 
+    = form_with model: [@group, @message], html: {class: "chat-main__Footer__Form"}, local: true do |f|
       %div.chat-main__Footer__Form__contents
-        %input.chat-main__Footer__Form__inputContent{"placeholder": "type a message", "type": "text"}
-        %div.chat-main__Footer__Form__inputImage
-        %div.chat-main__Footer__Form__fa-image 
-          %div.chat-main__Footer__Form__fa-image-before
-            %label{class: "input-box__image"}
-              = icon('fas', 'image')
-              %input{type: "file"}
-            
-      .chat-main__Footer__Form__submit Send
+        = f.text_field :content, class: 'chat-main__Footer__Form__contents__inputContent', placeholder: 'type a message'
+        = f.label :image, class: 'chat-main__Footer__Form__contents__inputImage' do
+          = icon('far', 'image', class: 'chat-main__Footer__Form__contents__inputImage__fa-image')
+          = f.file_field :image, class: 'chat-main__Footer__Form__contents__inputImage__fa-image-before'
+      = f.submit 'Send', class: 'chat-main__Footer__Form__submit'
