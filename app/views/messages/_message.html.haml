@@ -9,3 +9,5 @@
       %p.chat-main__MessageField__MessageBox__Message__content
         = message.content
     = image_tag message.image.url, class: 'Message__image' if message.image.present?
+
+.MessageBox{data: {message: {id: message.id}}}
